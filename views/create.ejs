@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create</title>
+    <link rel = "icon" href = "https://banner2.kisspng.com/20180424/bhw/kisspng-computer-icons-download-inviter-5adef21de21ae0.5422355315245604139261.jpg" type = "image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="inside.css">
+    <!-- <style>
+        .bod{
+            background-color: #EEEEEE;
+            color: black;
+            padding-bottom: 12px;
+            padding-left: 12px;
+            padding-top: 12px;
+            margin-left: 100px;
+            margin-right: 100px;
+        }
+        body{
+            background-color: #537895;
+            background-image: linear-gradient(315deg, #537895 0%, #09203f 74%);
+            /* background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,52,89,1) 0%, rgba(0,168,232,1) 90% ); */
+            /* background-color: #0B0C10; */
+            /* background: #c31432;  */
+            /* background: -webkit-linear-gradient(to right, #240b36, #c31432);  */
+            /* background: linear-gradient(to right, #240b36, #c31432); */
+            /* background: #36D1DC;   */
+            /* background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);   */
+            /* background: linear-gradient(to right, #5B86E5, #36D1DC); */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* font-family: 'Roboto' , sans-serif; */
+            font-family: 'Poppins', sans-serif;
+
+            color: white;
+        }
+        .header{
+            /* position:absolute; */
+            background-color: #FAFAF1;
+            color: black;
+            padding-left: 80px;
+            padding-top: 15px;
+            font-weight: bold;
+            font-size: 27px;
+            margin-right: -8px;
+            margin-top: -10px;
+            margin-left: -10px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+        }
+        a{
+            color: black;
+            text-decoration: none;
+        }
+        .appbar{
+            margin-left: 450px;
+        }
+        .inlin{
+            display: inline;
+        }
+    </style> -->
+</head>
+<body onload="enableEditMode();">
+    <div class="header">
+        <a href="/dashboard">
+            <span>Inviter</span>
+        </a>  
+        <span class="appbar">   
+            <span>
+                <form class="inlin" action="/dashboard" method="GET">
+                    <button class="appbtn ">
+                        <i class="fa fa-home" style="font-size: 40px; color: #AAAAAA;"></i>
+                    </button>
+                </form>    
+            </span>
+            <span>
+                <form class="inlin" action="/create" method="GET">
+                    <button class="appbtn btnin">
+                        <i class="fa fa-edit" style="font-size: 40px; color: #1245ef;"></i>
+                    </button>
+                </form>    
+            </span>
+            <span>
+                <form class="inlin" action="/notification" method="GET">
+                    <button class="appbtn">
+                        <i class="fa fa-bell" style="font-size: 40px; color: #aaaaaa;"></i>
+                    </button>
+                    <% if(user.notification.length!=0){ %>
+                        <span id="noofnot">
+                                <%= user.notification.length; %>
+                        </span>
+                    <% } %>
+                </form>    
+            </span>
+            <span>
+                <form class="inlin" action="/users/logout" method="GET">
+                    <button class="appbtn">
+                        <i class="fa fa-sign-out" style="font-size: 40px; color: #aaaaaa;"></i>
+                    </button>
+                </form>    
+            </span>
+        </span>
+        <span id="welcometxt">Welcome  <strong><%= user.username %></strong> !</span>
+
+    </div>
+
+    <div class="bod" onshow="exccmdarg('fontName','Comic Sans MS')">
+        <div>
+            <div style="font-size: xx-large; margin-bottom: 20px;">
+                <strong>Create</strong>
+            </div>
+            <form action="/create" method="POST">
+                <div>
+                    <div><strong>Event name</strong></div>
+                    <input type="text" name="name" placeholder="name">
+                </div>
+                <div>
+                    <div><strong>Date of event:</strong></div>
+                    <input name="date" type="date" >
+                </div>
+                <div>
+                    <div><strong>Invite text:</strong></div>
+                    <div>
+                        <button onclick="exccmd('bold');" type="button" class="btnedit fa fa-bold"></button>
+                        <button onclick="exccmd('italic');" type="button" class="btnedit fa fa-italic"></button>
+                        <button onclick="exccmd('underline');" type="button" class="btnedit fa fa-underline"></button>
+                        <button onclick="exccmd('strikeThrough');" type="button" class="btnedit fa fa-strikethrough"></button>
+                        <button onclick="exccmd('justifyLeft');" type="button" class="btnedit fa fa-align-left"></button>
+                        <button onclick="exccmd('justifyCenter');" type="button" class="btnedit fa fa-align-center"></button>
+                        <button onclick="exccmd('justifyRight');" type="button" class="btnedit fa fa-align-right"></button>
+                        <button onclick="exccmd('justifyFull');" type="button" class="btnedit fa fa-align-justify"></button>
+                        <button onclick="exccmd('cut');" type="button" class="btnedit fa fa-cut"></button>
+                        <button onclick="exccmd('copy');" type="button" class="btnedit fa fa-copy"></button>
+                        <button onclick="exccmd('paste');" type="button" class="btnedit fa fa-paste"></button>
+                        <button onclick="exccmd('indent');" type="button" class="btnedit fa fa-indent"></button>
+                        <button onclick="exccmd('outdent');" type="button" class="btnedit fa fa-outdent"></button>
+                        <button onclick="exccmd('subscript');" type="button" class="btnedit fa fa-subscript"></button>
+                        <button onclick="exccmd('superscript');" type="button" class="btnedit fa fa-superscript"></button>
+                        <button onclick="exccmd('undo');" type="button" class="btnedit fa fa-undo"></button>
+                        <button onclick="exccmd('redo');" type="button" class="btnedit fa fa-repeat"></button>
+                        <br>
+                        <select onchange="exccmdarg('formatBlock', this.value);">
+                            <option value="H1">H1</option>
+                            <option value="H2">H2</option>
+                            <option value="H3">H3</option>
+                            <option value="H4">H4</option>
+                            <option value="H5">H5</option>
+                            <option value="H6">H6</option>
+                        </select> 
+                        <select  onchange="exccmdarg('fontName', this.value);">
+                            <option value="Arial">Arial</option>
+                            <option value="Comic Sans MS">Comic Sans MS</option>
+                            <option value="Courier">Courier</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Verdana">Verdana</option>
+                        </select>
+                        <select onchange="exccmdarg('fontSize', this.value);">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select> 
+                        <input onchange="exccmdarg('forecolor',this.value);" style="position: relative; top: 7px; width: 60px; height: 30px;" type="color">
+                    </div>
+                    <iframe class="txta" name="invite" id="invid" cols="200" rows="12" placeholder="Write something..." style="resize: vertical;"></iframe>
+                    <textarea style="visibility: hidden;" class="txta" id="invtxt" name="invit" cols="100" rows="12" placeholder="Write something..." style="resize: vertical;"></textarea>
+                </div>
+                <div style="margin-top: -300px;">
+                    <div>Usernames to send request</div>
+                    <textarea placeholder="Seperate usernames with commas  ','" class="txta" name="people" id="" cols="70" rows="10"></textarea>
+                </div>
+                <div>
+                    <div>Any deadline</div>
+                    <textarea placeholder="Leave blank if there is none" class="txta" name="dead" id="" cols="70" rows="10"></textarea>
+                </div>
+                <div>
+                    <button onclick="sub();" style="margin-top: 15px ;" class="btn">Submit</button>
+                </div>
+            </form>
+            <%= error %>
+            <% error=''; %>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function enableEditMode()
+        {
+            invite.document.designMode='On';
+            invite.document.execCommand('fontSize', false, '1');   
+        }
+        function exccmd(cmd)
+        {
+            invite.document.execCommand(cmd, false, null);
+        }
+        function exccmdarg(cmd,ar)
+        {
+            invite.document.execCommand(cmd, false, ar);
+        }
+        function sub()
+        {
+            document.getElementById('invtxt').innerHTML=invite.document.body.innerHTML;
+            // console.log(invite.document.body.innerHTML);            
+        }
+    </script>
+</body>
+</html>

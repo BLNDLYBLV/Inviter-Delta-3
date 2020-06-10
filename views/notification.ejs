@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link rel = "icon" href = "https://banner2.kisspng.com/20180424/bhw/kisspng-computer-icons-download-inviter-5adef21de21ae0.5422355315245604139261.jpg" type = "image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="inside.css">
+    <!-- <style>
+        .bod{
+            background-color: #EEEEEE;
+            color: black;
+            padding-bottom: 12px;
+            padding-left: 12px;
+            padding-top: 12px;
+            margin-left: 100px;
+            margin-right: 100px;
+        }
+        .eve{
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 20px;
+            margin-left: 12px;
+            margin-bottom: 10px;
+            margin-top: 12px;
+            margin-right: 10px;
+            border: 2px solid black;
+            background-color: #FFFFFF;
+        }
+        body{
+            background-color: #537895;
+            background-image: linear-gradient(315deg, #537895 0%, #09203f 74%);
+            /* background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,52,89,1) 0%, rgba(0,168,232,1) 90% ); */
+            /* background-color: #0B0C10; */
+            /* background: #c31432;  */
+            /* background: -webkit-linear-gradient(to right, #240b36, #c31432);  */
+            /* background: linear-gradient(to right, #240b36, #c31432); */
+            /* background: #36D1DC;   */
+            /* background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);   */
+            /* background: linear-gradient(to right, #5B86E5, #36D1DC); */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* font-family: 'Roboto' , sans-serif; */
+            font-family: 'Poppins', sans-serif;
+
+            color: white;
+        }
+        .header{
+            /* position:absolute; */
+            background-color: #FAFAF1;
+            color: black;
+            padding-left: 80px;
+            padding-top: 15px;
+            font-weight: bold;
+            font-size: 27px;
+            margin-right: -50px;
+            margin-top: -10px;
+            margin-left: -10px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+        }
+        a{
+            color: black;
+            text-decoration: none;
+        }
+        .appbar{
+            margin-left: 300px;
+        }
+        .inlin{
+            display: inline;
+        }
+    </style> -->
+</head>
+<body>
+    <div class="header">
+        <a href="/dashboard">
+            <span>Inviter</span>
+        </a>  
+        <span class="appbar">   
+            <span>
+                <form class="inlin" action="/dashboard" method="GET">
+                    <button class="appbtn">
+                        <i class="fa fa-home" style="font-size: 40px; color: #AAAAAA;"></i>
+                    </button>
+                </form>    
+            </span>
+            <span>
+                <form class="inlin" action="/create" method="GET">
+                    <button class="appbtn">
+                        <i class="fa fa-edit" style="font-size: 40px; color: #aaaaaa;"></i>
+                    </button>
+                </form>    
+            </span>
+            <span>
+                <form class="inlin" action="/notification" method="GET">
+                    <button class="appbtn btnin">
+                        <i class="fa fa-bell" style="font-size: 40px; color: #1245EF;"></i>
+                    </button>
+                    <% if(user.notification.length!=0 || user.notifmsg.length!=0){ %>
+                    <span id="noofnot">
+                            <%= user.notification.length+user.notifmsg.length; %>
+                    </span>
+                    <% } %>
+                </form>    
+            </span>
+            <span>
+                <form class="inlin" action="/users/logout" method="GET">
+                    <button class="appbtn">
+                        <i class="fa fa-sign-out" style="font-size: 40px; color: #aaaaaa;"></i>
+                    </button>
+                </form>    
+            </span>
+        </span>    
+        <span id="welcometxt">Welcome  <strong><%= user.username %></strong> !</span>
+
+    </div>
+    <div class="bod">
+        <div style="font-size: xx-large;"><strong>Notifications</strong></div>
+            <% user.notifmsg.forEach((msg)=>{ %>
+                <div class="eve">
+                   <span class="msg"> <%= msg %> </span>
+                   <form style="display: inline;" method="POST" action=<%= "/not/"+msg.split(' ').join('&');  %>>
+                    <button class="fa fa-close msgx"></button>
+                   </form>
+                </div>
+            <% }) %>
+            
+            <% events.forEach( (ev) =>{ %>
+                <div class="eve">
+                    <div style="margin-bottom: 10px;">
+                        <span style="margin-right: 10px;"><strong>Event name:</strong></span>
+                        <span><%= ev.name %></span>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <span style="margin-right: 10px;" ><strong>Event date:</strong></span>
+                        <span><%= ev.date %></span>
+                    </div>
+                    <div style="margin-top: -21px;">
+                        <span style="margin-left: 680px;">
+                            <form style="display: inline;" method="POST" action=<%= "/notification/"+ ev.name.replace(' ','&') +"/accept" %>>
+                                <button class="decbtn accbtn">accept</button>
+                            </form>
+                        </span>    
+                        <span style="margin-left: 10px;">
+                            <form style="display: inline;" method="POST" action=<%= "/notification/"+ ev.name.replace(' ','&') +"/decline" %>>
+                                <button class="decbtn declbtn">decline</button>
+                            </form>
+                        </span>    
+                    </div>
+                    <div style="margin-top: -15px">
+                        <span style="margin-right: 10px;"><strong>Event organiser:</strong></span>
+                        <span><%= ev.organiser %></span>
+                    </div>
+                    <div style="margin-left: -20px; margin-top: 48px;margin-bottom: -20px;" class="invarea">
+                        <form method="GET" action=<%= "/invite/"+ ev.name.replace(' ','&') %>>
+                            <button style="margin-right: 20px;" class="invitebtn">view</button>
+                            <span style="position: relative; left: -10px;" class="fa fa-arrow-left"></span>
+                            <span> Click here to view the invite </span>
+                        </form>
+                    </div>
+                </div>
+            
+                <% }) %>
+        </div>
+    </div>
+</body>
+</html>

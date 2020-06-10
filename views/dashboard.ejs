@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel = "icon" href = "https://banner2.kisspng.com/20180424/bhw/kisspng-computer-icons-download-inviter-5adef21de21ae0.5422355315245604139261.jpg" type = "image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="inside.css">
+    <!-- <style>
+        .bod{
+            /* background-color: #EEEEEE; */
+            background-color: rgb(240, 242, 245);
+            color: black;
+            padding-bottom: 12px;
+            padding-left: 20px;
+            padding-top: 20px;
+            padding-right: 20px;
+            margin-left: 100px;
+            margin-right: 100px;
+            margin-top: -15px;
+            border: 1.5px solid darkgray;
+            border-radius: 12px;
+        }
+        .eve{
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 20px;
+            margin-left: 12px;
+            margin-bottom: 10px;
+            margin-top: 12px;
+            margin-right: 10px;
+            border: 2px solid black;
+            border-radius: 10px;
+            background-color: #FFFFFF;
+        }
+        body{
+            background-color: #537895;
+            background-image: linear-gradient(315deg, #537895 0%, #09203f 74%);
+            /* background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,52,89,1) 0%, rgba(0,168,232,1) 90% ); */
+            /* background-color: #0B0C10; */
+            /* background: #c31432;  */
+            /* background: -webkit-linear-gradient(to right, #240b36, #c31432);  */
+            /* background: linear-gradient(to right, #240b36, #c31432); */
+            /* background: #36D1DC;   */
+            /* background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);   */
+            /* background: linear-gradient(to right, #5B86E5, #36D1DC); */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* font-family: 'Roboto' , sans-serif; */
+            font-family: 'Poppins', sans-serif;
+            color: white;
+        }
+        .header{
+            /* position:absolute; */
+            background-color: #FAFAF1;
+            color: black;
+            padding-left: 80px;
+            padding-top: 23px;
+            font-weight: bold;
+            font-size: 27px;
+            margin-right: -8px;
+            margin-top: -10px;
+            margin-left: -10px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+        }
+        .btn{
+            vertical-align: middle;
+            /* padding-left: 70px;
+            padding-right: 70px;
+            padding-top: 10px;
+            padding-bottom: 10px; */
+            width: 165px;
+            margin-bottom: 7px;
+            /* background-color: #66FCF1; */
+            background-color: #36D1FC;
+            border: none;
+            border-radius: 4px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            color: ivory;
+            font-weight: bold ;
+            font-size: medium;
+        }
+        a{
+            color: black;
+            text-decoration: none;
+        }
+        .appbar{
+            margin-left: 450px;
+        }
+        .inlin{
+            display: inline;
+        }
+        
+    </style> -->
+</head>
+<body>
+    <div class="header">
+        <a href="/dashboard">
+            <span>Inviter</span>
+        </a>  
+        <span class="appbar">   
+            <span>
+                <form class="inlin" action="/dashboard" method="GET">
+                    <button class="appbtn btnin">
+                        <i class="fa fa-home" style="font-size: 40px; color: #1245ef;"></i>
+                    </button>
+                </form>    
+            </span>
+            <span>
+                <form class="inlin" action="/create" method="GET">
+                    <button class="appbtn">
+                        <i class="fa fa-edit" style="font-size: 40px; color: #aaaaaa;"></i>
+                    </button>
+                </form>    
+            </span>
+            <span>
+                <form class="inlin" action="/notification" method="GET">
+                    <button class="appbtn">
+                        <i class="fa fa-bell" style="font-size: 40px; color: #aaaaaa;"></i>
+                    </button>
+                    <% if(user.notification.length!=0){ %>
+                        <span id="noofnot">
+                                <%= user.notification.length; %>
+                        </span>
+                    <% } %>
+                </form>    
+            </span>
+            <span>
+                <form class="inlin" action="/users/logout" method="GET">
+                    <button class="appbtn">
+                        <i class="fa fa-sign-out" style="font-size: 40px; color: #aaaaaa;"></i>
+                    </button>
+                </form>    
+            </span>
+        </span>    
+        <span id="welcometxt">Welcome  <strong><%= user.username %></strong> !</span>
+
+    </div>
+    <div class="bod">
+        <div style="margin-bottom: 20px; font-size: xx-large;">
+            <strong>Dashboard</strong>
+        </div>
+        <div style="font-size: larger;">
+            <strong>Events created:</strong>
+        </div>
+        <% var i; %>
+        <% eventc.forEach(ev =>{ %>
+        <div class="eve">
+            <div>
+                <span style="margin-right: 10px;"><strong>Event name:</strong></span>
+                <span><%= ev.name %></span>
+            </div>
+            <div>
+                <span style="margin-right: 10px;"><strong>Event date:</strong></span>
+                <span><%= ev.date %></span>
+            </div>
+            <div class="invarea">
+                <form method="GET" action=<%= "/invite/"+ ev.name.replace(' ','&') %>>
+                    <span style="margin-left: 60%;"> Click here to view the invite </span>
+                    <button class="invitebtn">view</button>
+                </form>
+            </div>
+            <div style="margin-top: -38px">
+                <span style="margin-right: 10px;"><strong>Event organiser:</strong></span>
+                <span><%= ev.organiser %></span>
+            </div>
+        </div>
+          
+        <% }); %>
+    <div>
+        <div style="font-size: larger;">
+            <strong>Events signed:</strong>
+        </div>
+        <% var i; %>
+        <% eventj.forEach(ev =>{ %>
+         
+        <div class="eve">
+            <div>
+                <span style="margin-right: 10px;"><strong>Event name:</strong></span>
+                <span><%= ev.name %></span>
+            </div>
+            <div>
+                <span style="margin-right: 10px;"><strong>Event date:</strong></span>
+                <span><%= ev.date %></span>
+            </div>
+            <div class="invarea">
+                <form method="GET" action=<%= "/invite/"+ ev.name.replace(' ','&') %>>
+                    <span style="margin-left: 60%;"> Click here to view the invite </span>
+                    <button class="invitebtn">view</button>
+                </form>
+            </div>
+            <div style="margin-top: -38px">
+                <span style="margin-right: 10px;"><strong>Event organiser:</strong></span>
+                <span><%= ev.organiser %></span>
+            </div>
+        </div>
+      
+        <% }) %>
+    </div>  
+</div>     
+
+</body>
+</html>

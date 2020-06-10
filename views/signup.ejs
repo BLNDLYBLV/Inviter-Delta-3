@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body{
+            background-color: #537895;
+            background-image: linear-gradient(315deg, #537895 0%, #09203f 74%);
+            /* background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,52,89,1) 0%, rgba(0,168,232,1) 90% ); */
+            /* background-color: #0B0C10;  */
+            /* background: #c31432;  */
+            /* background: -webkit-linear-gradient(to right, #240b36, #c31432);  */
+            /* background: linear-gradient(to right, #240b36, #c31432); */
+            /* background: #36D1DC;   */
+            /* background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);   */
+            /* background: linear-gradient(to right, #5B86E5, #36D1DC); */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* font-family: 'Roboto' , sans-serif; */
+            font-family: 'Poppins', sans-serif;
+            color: white;
+        }
+        
+        .login{
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 7px;
+            padding-bottom: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: fit-content;
+            height: fit-content;
+            margin-top: -150px;
+            margin-left: -130px;
+            background-color: #555555aa;
+            border-radius: 5px;
+
+        }
+        input{
+            /* padding-right: 70px; */
+            width: 254px;
+            padding-bottom: 8px;
+            padding-top: 8px;
+            margin-bottom: 8px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            padding-left: 8px;
+            background-color: #1F2833;  
+            color: white;
+        }
+        .btn{
+            vertical-align: middle;
+            /* padding-left: 70px;
+            padding-right: 70px;
+            padding-top: 10px;
+            padding-bottom: 10px; */
+            width: 265px;
+            margin-bottom: 7px;
+            /* background-color: #66FCF1; */
+            background-color: #36D1FC;
+            border: none;
+            border-radius: 4px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            color: ivory;
+            font-weight: bold ;
+            font-size: medium;
+        }
+        #logtxt{
+            /* text-align: center; */
+            color: white;
+            font-weight: bold;
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+        .header{
+            /* position:absolute; */
+            background-color: #FAFAF1;
+            color: black;
+            padding-left: 80px;
+            padding-top: 15px;
+            font-weight: bold;
+            font-size: 27px;
+            margin-right: -50px;
+            margin-top: -10px;
+            margin-left: -10px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+        }
+        a{
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="/">
+            <span>Inviter</span>
+        </a>    
+    </div>
+    <form class="login" action="/users/signup" method="POST">
+        <p id="logtxt">Sign up</p>
+        <div>
+            <input type="text" placeholder="username" name="username">
+        </div>
+        <div>
+            <input type="password" placeholder="password" name="password">
+        </div>
+        <div>
+            <input type="password" placeholder="retype password" name="retypepassword">
+        </div>
+        <div>
+            <input type="email" placeholder="Email-id" name="emailid">
+        </div>
+        <div>
+            <button class="btn">Submit</button>
+        </div>
+        <p>
+
+            <% errors.slice().reverse().forEach(error =>{  %>
+                <%= error %>
+                <% errors.pop(); %>
+                <br>
+                
+            <%  }) %>
+        </p>
+        <br>
+        <a href="/users/login" style="color: seashell;">Already an user?</a>
+    </form>
+    
+</body>
+</html>
